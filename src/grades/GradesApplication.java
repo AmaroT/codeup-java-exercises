@@ -108,14 +108,14 @@ public class GradesApplication {
                 System.out.println();
 
                 if(student.equalsIgnoreCase("All")) {
-                    System.out.println("Name            | GitHub username  |   GPA                Attendance");
+                    System.out.println("Name         | GitHub username  |   GPA                     | Attendance");
 
                     double overallGPA = 0;
 
                     for(String stu : students.keySet()) {
                         Student s = students.get(stu);
 
-                        System.out.printf("%-10s   | %-15s | %-5s | %s%%%n", s.getName(), stu, s.getGradeAverage(), s.attendancePercentage());
+                        System.out.printf("%-10s   | %-15s  | %-5s                  | %s%%%n", s.getName(), stu, s.getGradeAverage(), s.attendancePercentage());
 
 //                        Formatter fmt = new Formatter();
 //                        fmt.format("%.2f", overallGPA);
