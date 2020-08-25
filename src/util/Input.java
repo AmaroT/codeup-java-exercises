@@ -3,96 +3,73 @@ package util;
 import java.util.Scanner;
 
 public class Input {
-    private Scanner scanner;
+    private static final Scanner s = new Scanner(System.in);
 
-    public String getString(){
-        String response = scanner.nextLine();
-        return response;
-   }
-   public String getString(boolean prompt){
-       System.out.print("Enter a String: ");
-       return getString();
-   }
-   public String getString(String prompt){
-       System.out.print(prompt);
-       return getString();
-   }
-   public boolean yesNo(){
-        String s = this.scanner.nextLine();
-        return "y".equalsIgnoreCase(s) || "yes".equalsIgnoreCase(s);
-   }
-   public boolean yesNo(boolean prompt){
-       System.out.println("(Yes/No): ");
-       return yesNo();
-   }
-   public int getInt(){
-        try{
-            return Integer.parseInt(this.scanner.nextLine());
-        }catch(NumberFormatException e){
-            System.out.print("Invalid Input, Try Again: ");
+    public static String getString(){
+
+        return s.nextLine().trim().toLowerCase();
+    }
+    public static boolean yesNo(){
+        System.out.println("Type [Y/N]: ");
+        String myStr = getString();
+        return (myStr.equalsIgnoreCase("yes") || (myStr.equalsIgnoreCase("y")));
+    }
+    public int getInt() {
+//        System.out.println("Enter a number: ");
+        String s = getString();
+        int intNum = 0;
+        try {
+            // get input from the user
+            // parse the input string as an integer
+            // if valid, return the input
+
+            intNum = Integer.parseInt(s);
+
+        } catch (NumberFormatException nfe) {
+            // catch runs if the "try" code throws an exception
+            System.out.println("That is not a valid number " + nfe.getMessage());
             return getInt();
         }
-   }
-   public int getInt(boolean prompt){
-       System.out.println("Enter an Integer: ");
-       return getInt();
-   }
-   public int getInt(String prompt){
-       System.out.println(prompt);
-       return getInt();
-   }
-   public int getInt(int min, int max) {
-        int n = getInt();
-        return (n >= min && n <= max) ? n : getInt(min, max);
-   }
-   public int getInt(int min, int max, boolean prompt){
-       System.out.printf("Enter an Integer between %d and %d: ",min, max);
-       return getInt(min, max);
-   }
-   public int getInt(int min, int max, String prompt) {
-       System.out.printf(prompt, min, max);
-       return getInt(min, max);
-   }
-   public double getDouble() {
+        return intNum;
+    }
+    public int getInt(int min, int max){
+        System.out.printf("Enter a number between %d and %d:\n",min, max);
+        String myStr = getString();
+        int num = Integer.parseInt(myStr);
+        while (num < min || num > max) {
+            System.out.printf("Enter a number between %d and %d:\n",min, max);
+            myStr = getString();
+            num = Integer.parseInt(myStr);
+        }
+        return num;
+    }
+    public double getDouble() {
+        System.out.println("Please enter a number: ");
+        String s = getString();
+        double doubleNum = 0;
         try {
-            return Double.parseDouble(this.scanner.nextLine());
-        } catch(NumberFormatException e){
-            System.out.println("Invalid Input, Try Again: ");
+
+            doubleNum = Double.parseDouble(s);
+
+        } catch (NumberFormatException nfe) {
+            // catch runs if the "try" code throws an exception
+            System.out.println("That is not a valid number " + nfe.getMessage());
             return getDouble();
         }
-   }
-   public double getDouble(boolean prompt){
-       System.out.println("Enter a Double: ");
-       return getDouble();
-
-   }
-   public double getDouble(String prompt){
-       System.out.println(prompt);
-       return getDouble();
-
-   }
-   public double getDouble(double min, double max){
-        double n = getDouble();
-        return ( n >= min && n <= max) ? n: getDouble(min, max);
-   }
-   public double getDouble(double min, double max, boolean prompt){
-       System.out.printf("Enter a Double between %f and %f: ",min,max);
-       return getDouble();
-   }
-   public double getDouble(double min, double max, String prompt){
-       System.out.printf(prompt, min, max);
-       return getDouble();
-   }
-   public int getBinary(){
-        try{
-            System.out.println("Enter a binary Number: ");
-            return Integer.valueOf(this.scanner.nextLine(), 2);
-        }catch(NumberFormatException e) {
-            System.out.println("Invalid Binary, try again: ");
-            return getBinary();
-       }
+        return doubleNum;
     }
-    public Input(){
-        this.scanner = new Scanner(System.in);
+
+
+    public double getDouble(double min, double max){
+        System.out.printf("Enter a number between %f and %f:\n",min, max);
+        String myStr = getString();
+        double num = Double.parseDouble(myStr);
+        while (num < min || num > max) {
+            System.out.printf("Enter a number between %f2 and %f2:\n",min, max);
+            myStr = getString();
+            num = Double.parseDouble(myStr);
+        }
+        return num;
     }
+
 }
